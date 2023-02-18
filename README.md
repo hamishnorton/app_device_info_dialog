@@ -11,29 +11,53 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Provides an Application and Device Information Dialog to assist identifying the specific version and device being used.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Shows:
+
+1. App name, package, version, and build.
+2. Run mode, and flavor
+3. Screen size, pixel ratio and text scale factor
+4. Device details for: Android, iOS, Windows, and Web
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add to your `pubspec.yaml`
+
+```yaml
+dependencies:
+	app_device_info_dialog:
+    	git:
+			url: https://github.com/hamishnorton/app_device_info_dialog.git
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Create a `showDialog()` method in a stateful widget
 
 ```dart
-const like = 'sample';
+Future<void> _showDeviceInfoDialog() async {
+	return showDialog<void>(
+		context: context,
+		barrierDismissible: true, // user must tap button!
+		builder: (BuildContext context) {
+			return const AppDeviceInfoDialog(
+				flavor: 'Test',
+			);
+		},
+	);
+}
 ```
 
-## Additional information
+And call it from the likes of a button `onPressed`.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+ElevatedButton(
+	onPressed: _showDeviceInfoDialog,
+	child: const Text(
+		'Show Device Info Dialog',
+	),
+),
+```

@@ -43,7 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: _showDeviceInfoDialog,
           child: const Text(
             'Show Device Info Dialog',
-            // style: TextStyle(fontSize: 24),
           ),
         ),
       ),
@@ -55,7 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return const AppDeviceInfoDialog();
+        return const AppDeviceInfoDialog(
+          flavor: 'Test',
+        );
       },
     );
   }
