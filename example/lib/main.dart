@@ -5,7 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
-const appTitle = 'Device Info Dialog Demo';
+const appTitle = 'App Device Info Dialog Demo';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
