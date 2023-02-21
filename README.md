@@ -38,13 +38,17 @@ dependencies:
 Create a `showDialog()` method in a stateful widget
 
 ```dart
-Future<void> _showDeviceInfoDialog() async {
+Future<void> _showAppDeviceInfoDialog() async {
 	return showDialog<void>(
 		context: context,
 		barrierDismissible: true, // user must tap button!
 		builder: (BuildContext context) {
 			return const AppDeviceInfoDialog(
-				flavor: 'Test',
+				 addtionalValuePairs: {
+					'Flavor': 'Test',
+					'Target environment': 'Dev',
+					'API end point': 'https://my.end.point',
+				},
 			);
 		},
 	);
@@ -55,9 +59,9 @@ And call it from the likes of a button `onPressed`.
 
 ```dart
 ElevatedButton(
-	onPressed: _showDeviceInfoDialog,
+	onPressed: _showAppDeviceInfoDialog,
 	child: const Text(
-		'Show Device Info Dialog',
+		'Show App Device Info Dialog',
 	),
 ),
 ```

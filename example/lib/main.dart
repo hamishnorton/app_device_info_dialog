@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: _showDeviceInfoDialog,
+          onPressed: _showAppAndDeviceInfoDialog,
           child: const Text(
             'Show Device Info Dialog',
           ),
@@ -49,13 +49,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<void> _showDeviceInfoDialog() async {
+  Future<void> _showAppAndDeviceInfoDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return const AppDeviceInfoDialog(
-          flavor: 'Test',
+          addtionalValuePairs: {
+            'Flavor': 'Test',
+            'Target environment': 'Dev',
+            'API end point': 'https://my.end.point',
+          },
         );
       },
     );

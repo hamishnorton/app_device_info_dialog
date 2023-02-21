@@ -13,10 +13,10 @@ import 'src/device_info.dart';
 class AppDeviceInfoDialog extends StatelessWidget {
   const AppDeviceInfoDialog({
     Key? key,
-    this.flavor = '',
+    required this.addtionalValuePairs,
   }) : super(key: key);
 
-  final String flavor;
+  final Map<String, String> addtionalValuePairs;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +63,9 @@ class AppDeviceInfoDialog extends StatelessWidget {
           child: Column(
             children: <Widget>[
               _getPackageInfo(),
-              const Divider(),
-              _getFlavor(),
               _buildTile('Run mode:', BuildInfo.runMode),
+              const Divider(),
+              ..._getAdditionalValuePairs(),
               const Divider(),
               ..._screenInfo(context),
               const Divider(),
@@ -91,9 +91,9 @@ class AppDeviceInfoDialog extends StatelessWidget {
           child: Column(
             children: <Widget>[
               _getPackageInfo(),
-              const Divider(),
-              _getFlavor(),
               _buildTile('Run mode:', BuildInfo.runMode),
+              const Divider(),
+              ..._getAdditionalValuePairs(),
               const Divider(),
               ..._screenInfo(context),
               const Divider(),
@@ -121,9 +121,9 @@ class AppDeviceInfoDialog extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 _getPackageInfo(),
-                const Divider(),
-                _getFlavor(),
                 _buildTile('Run mode:', BuildInfo.runMode),
+                const Divider(),
+                ..._getAdditionalValuePairs(),
                 const Divider(),
                 ..._screenInfo(context),
                 const Divider(),
@@ -149,9 +149,9 @@ class AppDeviceInfoDialog extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 _getPackageInfo(),
-                const Divider(),
-                _getFlavor(),
                 _buildTile('Run mode:', BuildInfo.runMode),
+                const Divider(),
+                ..._getAdditionalValuePairs(),
                 const Divider(),
                 ..._screenInfo(context),
                 const Divider(),
@@ -217,9 +217,16 @@ class AppDeviceInfoDialog extends StatelessWidget {
     ];
   }
 
-  Widget _getFlavor() {
-    if (flavor.isEmpty) return Container();
-    return _buildTile('Flavor:', flavor);
+  List<Widget> _getAdditionalValuePairs() {
+    List<Widget> tiles = [];
+
+    addtionalValuePairs.forEach(
+      (key, value) {
+        tiles.add(_buildTile('$key:', value));
+      },
+    );
+
+    return tiles;
   }
 
   Widget _getPackageInfo() {
