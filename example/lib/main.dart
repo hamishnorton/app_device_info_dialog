@@ -57,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return const AppDeviceInfoDialog(
           addtionalValuePairs: {
             'Flavor': 'Test',
-            'Target environment': 'Dev',
-            'API end point': 'https://my.end.point',
+            'Environment': 'Dev',
+            'API end point': 'https://my.end.point/that/is/way/way/over/there',
           },
         );
       },

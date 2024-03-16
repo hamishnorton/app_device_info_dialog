@@ -1,10 +1,11 @@
 library app_device_info_dialog;
 
 import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'src/build_info.dart';
 import 'src/device_info.dart';
@@ -12,28 +13,19 @@ import 'src/device_info.dart';
 /// Alert dialog with app and device information
 class AppDeviceInfoDialog extends StatelessWidget {
   const AppDeviceInfoDialog({
-    Key? key,
+    super.key,
     required this.addtionalValuePairs,
-  }) : super(key: key);
+  });
 
   final Map<String, String> addtionalValuePairs;
-
-  _padding(Widget child) =>
-      Padding(padding: const EdgeInsets.all(3.0), child: child);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.only(bottom: 10.0),
-      title: Container(
-        padding: const EdgeInsets.all(15.0),
-        color: Colors.amber,
-        child: const Text(
-          'App & Device Info',
-          style: TextStyle(color: Colors.white),
-        ),
+      title: const Text(
+        'App & Device Info',
+        textAlign: TextAlign.center,
       ),
-      titlePadding: const EdgeInsets.all(0),
       content: _getContent(),
     );
   }
@@ -63,23 +55,21 @@ class AppDeviceInfoDialog extends StatelessWidget {
         if (!snapshot.hasData) return Container();
         WebBrowserInfo device = snapshot.data!;
         return SingleChildScrollView(
-          child: _padding(
-            Column(
-              children: <Widget>[
-                _getPackageInfo(),
-                _buildTile('Run mode:', BuildInfo.runMode),
-                const Divider(),
-                ..._getAdditionalValuePairs(),
-                const Divider(),
-                ..._screenInfo(context),
-                const Divider(),
-                _buildTile('Platform:', '${device.platform}'),
-                _buildTile('Product:', '${device.productSub}'),
-                _buildTile('User Agent:', '${device.userAgent}'),
-                _buildTile('Vendor:', '${device.vendorSub}'),
-                _buildTile('Language:', '${device.language}'),
-              ],
-            ),
+          child: Column(
+            children: <Widget>[
+              _getPackageInfo(),
+              _buildTile('Run mode:', BuildInfo.runMode),
+              const Divider(),
+              ..._getAdditionalValuePairs(),
+              const Divider(),
+              ..._screenInfo(context),
+              const Divider(),
+              _buildTile('Platform:', '${device.platform}'),
+              _buildTile('Product:', '${device.productSub}'),
+              _buildTile('User Agent:', '${device.userAgent}'),
+              _buildTile('Vendor:', '${device.vendorSub}'),
+              _buildTile('Language:', '${device.language}'),
+            ],
           ),
         );
       },
@@ -93,23 +83,21 @@ class AppDeviceInfoDialog extends StatelessWidget {
         if (!snapshot.hasData) return Container();
         IosDeviceInfo device = snapshot.data!;
         return SingleChildScrollView(
-          child: _padding(
-            Column(
-              children: <Widget>[
-                _getPackageInfo(),
-                _buildTile('Run mode:', BuildInfo.runMode),
-                const Divider(),
-                ..._getAdditionalValuePairs(),
-                const Divider(),
-                ..._screenInfo(context),
-                const Divider(),
-                _buildTile('Physical device?:', '${device.isPhysicalDevice}'),
-                _buildTile('Device:', device.name),
-                _buildTile('Model:', device.model),
-                _buildTile('System name:', device.systemName),
-                _buildTile('System version:', device.systemVersion),
-              ],
-            ),
+          child: Column(
+            children: <Widget>[
+              _getPackageInfo(),
+              _buildTile('Run mode:', BuildInfo.runMode),
+              const Divider(),
+              ..._getAdditionalValuePairs(),
+              const Divider(),
+              ..._screenInfo(context),
+              const Divider(),
+              _buildTile('Physical device?:', '${device.isPhysicalDevice}'),
+              _buildTile('Device:', device.name),
+              _buildTile('Model:', device.model),
+              _buildTile('System name:', device.systemName),
+              _buildTile('System version:', device.systemVersion),
+            ],
           ),
         );
       },
@@ -123,23 +111,21 @@ class AppDeviceInfoDialog extends StatelessWidget {
           if (!snapshot.hasData) return Container();
           AndroidDeviceInfo device = snapshot.data!;
           return SingleChildScrollView(
-            child: _padding(
-              Column(
-                children: <Widget>[
-                  _getPackageInfo(),
-                  _buildTile('Run mode:', BuildInfo.runMode),
-                  const Divider(),
-                  ..._getAdditionalValuePairs(),
-                  const Divider(),
-                  ..._screenInfo(context),
-                  const Divider(),
-                  _buildTile('Android version:', device.version.release),
-                  _buildTile('Android SDK:', '${device.version.sdkInt}'),
-                  _buildTile('Physical device?:', '${device.isPhysicalDevice}'),
-                  _buildTile('Manufacturer:', device.manufacturer),
-                  _buildTile('Model:', device.model),
-                ],
-              ),
+            child: Column(
+              children: <Widget>[
+                _getPackageInfo(),
+                _buildTile('Run mode:', BuildInfo.runMode),
+                const Divider(),
+                ..._getAdditionalValuePairs(),
+                const Divider(),
+                ..._screenInfo(context),
+                const Divider(),
+                _buildTile('Android version:', device.version.release),
+                _buildTile('Android SDK:', '${device.version.sdkInt}'),
+                _buildTile('Physical device?:', '${device.isPhysicalDevice}'),
+                _buildTile('Manufacturer:', device.manufacturer),
+                _buildTile('Model:', device.model),
+              ],
             ),
           );
         });
@@ -153,65 +139,59 @@ class AppDeviceInfoDialog extends StatelessWidget {
 
           WindowsDeviceInfo device = snapshot.data!;
           return SingleChildScrollView(
-            child: _padding(
-              Column(
-                children: <Widget>[
-                  _getPackageInfo(),
-                  _buildTile('Run mode:', BuildInfo.runMode),
-                  const Divider(),
-                  ..._getAdditionalValuePairs(),
-                  const Divider(),
-                  ..._screenInfo(context),
-                  const Divider(),
-                  _buildTile('Product Name:', device.productName),
-                  _buildTile('Edition Id:', device.editionId),
-                  _buildTile('Display Version:', device.displayVersion),
-                  _buildTile('Build Number:', '${device.buildNumber}'),
-                  _buildTile('Number Of Cores:', '${device.numberOfCores}'),
-                  _buildTile('Systme Memory (megabytes):',
-                      '${device.systemMemoryInMegabytes}'),
-                  _buildTile('Computer Name:', device.computerName),
-                  // _buildTile('Username:', device.userName),
-                  // _buildTile('Registered Owner:', device.registeredOwner),
-                  // _buildTile('Install Date:', '${device.installDate}'),
-                  // _buildTile('Service Pack Major:', '${device.servicePackMajor}'),
-                  // _buildTile('Service Pack Minor:', '${device.servicePackMinor}'),
-                  // _buildTile('Platform Id:', '${device.platformId}'),
-                  // _buildTile('Product Id:', device.productId),
-                  // _buildTile('Release Id:', device.releaseId),
-                  // _buildTile('Major Version:', '${device.majorVersion}'),
-                  // _buildTile('Minor Version:', '${device.minorVersion}'),
-                  // _buildTile('Build Lab Ex:', device.buildLabEx),
-                  // _buildTile('Build Lab:', device.buildLab),
-                  // _buildTile('Csd Version:', device.csdVersion),
-                  // _buildTile('Device Id:', device.deviceId),
-                  // _buildTile('Digital Product Id:', '${device.digitalProductId}'),
-                  // _buildTile('Product Type:', '${device.productType}'),
-                  // _buildTile('Reserved:', '${device.reserved}'),
-                  // _buildTile('Suit Mask:', '${device.suitMask}'),
-                ],
-              ),
+            child: Column(
+              children: <Widget>[
+                _getPackageInfo(),
+                _buildTile('Run mode:', BuildInfo.runMode),
+                const Divider(),
+                ..._getAdditionalValuePairs(),
+                const Divider(),
+                ..._screenInfo(context),
+                const Divider(),
+                _buildTile('Product Name:', device.productName),
+                _buildTile('Edition Id:', device.editionId),
+                _buildTile('Display Version:', device.displayVersion),
+                _buildTile('Build Number:', '${device.buildNumber}'),
+                _buildTile('Number Of Cores:', '${device.numberOfCores}'),
+                _buildTile('Systme Memory (megabytes):',
+                    '${device.systemMemoryInMegabytes}'),
+                _buildTile('Computer Name:', device.computerName),
+                // _buildTile('Username:', device.userName),
+                // _buildTile('Registered Owner:', device.registeredOwner),
+                // _buildTile('Install Date:', '${device.installDate}'),
+                // _buildTile('Service Pack Major:', '${device.servicePackMajor}'),
+                // _buildTile('Service Pack Minor:', '${device.servicePackMinor}'),
+                // _buildTile('Platform Id:', '${device.platformId}'),
+                // _buildTile('Product Id:', device.productId),
+                // _buildTile('Release Id:', device.releaseId),
+                // _buildTile('Major Version:', '${device.majorVersion}'),
+                // _buildTile('Minor Version:', '${device.minorVersion}'),
+                // _buildTile('Build Lab Ex:', device.buildLabEx),
+                // _buildTile('Build Lab:', device.buildLab),
+                // _buildTile('Csd Version:', device.csdVersion),
+                // _buildTile('Device Id:', device.deviceId),
+                // _buildTile('Digital Product Id:', '${device.digitalProductId}'),
+                // _buildTile('Product Type:', '${device.productType}'),
+                // _buildTile('Reserved:', '${device.reserved}'),
+                // _buildTile('Suit Mask:', '${device.suitMask}'),
+              ],
             ),
           );
         });
   }
 
   Widget _buildTile(String key, String value) {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Text(
-              key,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child: Text(value),
-          )
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text(
+          key,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Flexible(
+          child: Text(value),
+        )
+      ],
     );
   }
 
@@ -222,7 +202,7 @@ class AppDeviceInfoDialog extends StatelessWidget {
       _buildTile('Screen width:', size.width.toString()),
       _buildTile('Screen height:', size.height.toString()),
       _buildTile('Device pixel ratio:', media.devicePixelRatio.toString()),
-      _buildTile('Text scale factor:', media.textScaleFactor.toString()),
+      _buildTile('Text scale factor:', media.textScaler.toString()),
     ];
   }
 

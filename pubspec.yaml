@@ -1,21 +1,21 @@
 name: app_device_info_dialog
 description: App and device information dialog package.
-version: 0.0.3
+version: 0.1.0
 homepage: https://prozine.dev/app_device_info_dialog
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   device_info_plus: ^9.0.0
   flutter:
     sdk: flutter
-  package_info_plus: ^4.0.0
+  package_info_plus: ^5.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
