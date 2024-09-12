@@ -1,3 +1,4 @@
+// import 'package:app_device_info_dialog/app_device_info_dialog.dart';
 import 'package:app_device_info_dialog/app_device_info_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +24,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
   final String title;
+
+  const MyHomePage({super.key, required this.title});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -54,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
+        // return const Placeholder();
         return const AppDeviceInfoDialog(
           addtionalValuePairs: {
             'Flavor': 'Test',

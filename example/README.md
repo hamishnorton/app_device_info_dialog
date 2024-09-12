@@ -1,6 +1,6 @@
 # example
 
-A new Flutter project.
+A demonstration of the `app_device_info_dialog` package.
 
 ## Getting Started
 
