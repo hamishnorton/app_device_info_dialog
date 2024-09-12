@@ -1,6 +1,6 @@
 name: app_device_info_dialog
 description: App and device information dialog package.
-version: 0.1.0
+version: 0.2.0
 homepage: https://prozine.dev/app_device_info_dialog
 
 environment:
