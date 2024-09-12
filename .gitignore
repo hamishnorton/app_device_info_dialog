@@ -35,4 +35,5 @@ migrate_working_dir/
 .pub/
 /build/
 
-
+# FVM Version Cache
+.fvm/
